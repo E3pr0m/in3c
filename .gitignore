@@ -21,6 +21,9 @@
 # ─── wp-config (contiene credenziali) ────────────────────────
 wp-config.php
 
+# ─── .htaccess (generato da WP, dipende dall'ambiente) ───────
+.htaccess
+
 # ─── Local by WP Engine ──────────────────────────────────────
 local-xdebuginfo.php
 /.claude/
