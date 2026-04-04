@@ -1,4 +1,11 @@
 <?php
+/**
+ * in3c Theme — Functions
+ *
+ * @package    in3c-theme
+ * @author     GiuliaP.
+ * @version    1.0.0
+ */
 defined( 'ABSPATH' ) || exit;
 
 // ═══════════════════════════════════════════════════════
