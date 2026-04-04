@@ -1,0 +1,61 @@
+# ─── WordPress Core ──────────────────────────────────────────
+/index.php
+/license.txt
+/readme.html
+/wp-activate.php
+/wp-blog-header.php
+/wp-comments-post.php
+/wp-config-sample.php
+/wp-cron.php
+/wp-links-opml.php
+/wp-load.php
+/wp-login.php
+/wp-mail.php
+/wp-settings.php
+/wp-signup.php
+/wp-trackback.php
+/xmlrpc.php
+/wp-admin/
+/wp-includes/
+
+# ─── wp-config (contiene credenziali) ────────────────────────
+wp-config.php
+
+# ─── Local by WP Engine ──────────────────────────────────────
+local-xdebuginfo.php
+/.claude/
+
+# ─── Uploads (media) — escludiamo dal repo ───────────────────
+/wp-content/uploads/
+
+# ─── Temi default di WordPress ───────────────────────────────
+/wp-content/themes/twentytwentytwo/
+/wp-content/themes/twentytwentythree/
+/wp-content/themes/twentytwentyfour/
+/wp-content/themes/twentytwentyfive/
+
+# ─── Plugin di sistema / auto-aggiornamento ──────────────────
+/wp-content/plugins/akismet/
+/wp-content/upgrade/
+/wp-content/updraft/
+/wp-content/backup-db/
+
+# ─── Cache e file temporanei ─────────────────────────────────
+/wp-content/cache/
+*.log
+*.tmp
+*.bak
+*.swp
+.DS_Store
+Thumbs.db
+
+# ─── Node (se si usa build locale) ───────────────────────────
+node_modules/
+dist/
+.env
+.env.local
+
+# ─── index.php di sicurezza generati da WP ───────────────────
+wp-content/index.php
+wp-content/plugins/index.php
+wp-content/themes/index.php
