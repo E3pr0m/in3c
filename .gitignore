@@ -28,6 +28,9 @@ local-xdebuginfo.php
 # ─── Uploads (media) — escludiamo dal repo ───────────────────
 /wp-content/uploads/
 
+# ─── Traduzioni (gestite da WP, non dal repo) ────────────────
+/wp-content/languages/
+
 # ─── Temi default di WordPress ───────────────────────────────
 /wp-content/themes/twentytwentytwo/
 /wp-content/themes/twentytwentythree/
