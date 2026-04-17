@@ -31,16 +31,18 @@
 	═══════════════════════════════════════════════ -->
 	<section class="about" id="chi-sono" aria-label="Chi sono">
 		<div class="about__photo">
-			<!-- Sostituire src con il percorso della foto reale -->
-			<img
-				src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/foto-coach.jpg' ); ?>"
-				alt="Coach"
-				class="about__photo-img"
-				onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-			>
-			<div class="about__photo-placeholder" style="display:none;">
-				<span>Foto Coach</span>
-			</div>
+			<?php $foto_coach = get_field( 'about_foto_coach' ); ?>
+			<?php if ( $foto_coach ) : ?>
+				<img
+					src="<?php echo esc_url( $foto_coach['url'] ); ?>"
+					alt="<?php echo esc_attr( $foto_coach['alt'] ); ?>"
+					class="about__photo-img"
+				>
+			<?php else : ?>
+				<div class="about__photo-placeholder">
+					<span>Foto Coach</span>
+				</div>
+			<?php endif; ?>
 		</div>
 
 		<div class="about__blocks">
@@ -49,7 +51,7 @@
 				<div class="about__accent-bar"></div>
 				<div class="about__block-content">
 					<h2 class="about__block-title">Un po' di me</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					<p><?php echo esc_html( get_field( 'about_testo_me' ) ); ?></p>
 				</div>
 			</div>
 
@@ -57,7 +59,7 @@
 				<div class="about__accent-bar"></div>
 				<div class="about__block-content">
 					<h3 class="about__block-title about__block-title--sm">Cosa faccio</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					<p><?php echo esc_html( get_field( 'about_testo_faccio' ) ); ?></p>
 				</div>
 			</div>
 
@@ -65,7 +67,7 @@
 				<div class="about__accent-bar"></div>
 				<div class="about__block-content">
 					<h3 class="about__block-title about__block-title--sm">(A chi?)</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					<p><?php echo esc_html( get_field( 'about_testo_achi' ) ); ?></p>
 				</div>
 			</div>
 
@@ -91,13 +93,20 @@
 	═══════════════════════════════════════════════ -->
 	<section class="video-banner" id="percorsi" aria-label="Video banner">
 		<div class="video-banner__text reveal">
-			<p class="video-banner__quote">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</p>
+			<p class="video-banner__quote"><?php echo esc_html( get_field( 'banner_citazione' ) ); ?></p>
 		</div>
 		<div class="video-banner__media">
-			<!-- Sostituire con immagine/video reale -->
-			<div class="media-placeholder dark">
-				<span>Video / Immagine</span>
-			</div>
+			<?php $banner_media = get_field( 'banner_media' ); ?>
+			<?php if ( $banner_media ) : ?>
+				<img
+					src="<?php echo esc_url( $banner_media['url'] ); ?>"
+					alt="<?php echo esc_attr( $banner_media['alt'] ); ?>"
+				>
+			<?php else : ?>
+				<div class="media-placeholder dark">
+					<span>Video / Immagine</span>
+				</div>
+			<?php endif; ?>
 		</div>
 	</section>
 
@@ -113,81 +122,61 @@
 
 		<div class="manifesto__grid">
 
-			<!-- Punto 1 -->
-			<div class="manifesto__item" tabindex="0" role="article">
-				<div class="manifesto__default">
-					<span class="manifesto__number" aria-hidden="true">1.</span>
-					<h3 class="manifesto__item-title">Chiarezza sulla visione</h3>
-					<p class="manifesto__item-intro">Definire dove vuoi portare il tuo business.</p>
-				</div>
-				<div class="manifesto__hover-layer" aria-hidden="true">
-					<div class="manifesto__hover-photo">
-						<div class="media-placeholder light"><span>Foto</span></div>
-					</div>
-					<div class="manifesto__hover-text">
-						<span class="manifesto__number">1.</span>
-						<h3 class="manifesto__item-title">Chiarezza sulla visione</h3>
-						<p>Definire dove vuoi portare il tuo business: obiettivi, valori, stile di vita desiderato e impatto che vuoi creare.</p>
-					</div>
-				</div>
-			</div>
+			<?php
+			$manifesto_items = array(
+				1 => array(
+					'titolo' => get_field( 'manifesto_1_titolo' ),
+					'intro'  => get_field( 'manifesto_1_intro' ),
+					'testo'  => get_field( 'manifesto_1_testo' ),
+					'foto'   => get_field( 'manifesto_1_foto' ),
+				),
+				2 => array(
+					'titolo' => get_field( 'manifesto_2_titolo' ),
+					'intro'  => get_field( 'manifesto_2_intro' ),
+					'testo'  => get_field( 'manifesto_2_testo' ),
+					'foto'   => get_field( 'manifesto_2_foto' ),
+				),
+				3 => array(
+					'titolo' => get_field( 'manifesto_3_titolo' ),
+					'intro'  => get_field( 'manifesto_3_intro' ),
+					'testo'  => get_field( 'manifesto_3_testo' ),
+					'foto'   => get_field( 'manifesto_3_foto' ),
+				),
+				4 => array(
+					'titolo' => get_field( 'manifesto_4_titolo' ),
+					'intro'  => get_field( 'manifesto_4_intro' ),
+					'testo'  => get_field( 'manifesto_4_testo' ),
+					'foto'   => get_field( 'manifesto_4_foto' ),
+				),
+			);
 
-			<!-- Punto 2 -->
+			foreach ( $manifesto_items as $n => $item ) :
+			?>
 			<div class="manifesto__item" tabindex="0" role="article">
 				<div class="manifesto__default">
-					<span class="manifesto__number" aria-hidden="true">2.</span>
-					<h3 class="manifesto__item-title">Piano d'azione</h3>
-					<p class="manifesto__item-intro">Tradurre la strategia in azioni concrete.</p>
+					<span class="manifesto__number" aria-hidden="true"><?php echo esc_html( $n ); ?>.</span>
+					<h3 class="manifesto__item-title"><?php echo esc_html( $item['titolo'] ); ?></h3>
+					<p class="manifesto__item-intro"><?php echo esc_html( $item['intro'] ); ?></p>
 				</div>
 				<div class="manifesto__hover-layer" aria-hidden="true">
 					<div class="manifesto__hover-photo">
-						<div class="media-placeholder light"><span>Foto</span></div>
+						<?php if ( $item['foto'] ) : ?>
+							<img
+								src="<?php echo esc_url( $item['foto']['url'] ); ?>"
+								alt="<?php echo esc_attr( $item['foto']['alt'] ); ?>"
+							>
+						<?php else : ?>
+							<div class="media-placeholder light"><span>Foto</span></div>
+						<?php endif; ?>
 					</div>
 					<div class="manifesto__hover-text">
-						<span class="manifesto__number">2.</span>
-						<h3 class="manifesto__item-title">Piano d'azione</h3>
-						<p>Tradurre la strategia in azioni concrete, con step, tempistiche e obiettivi misurabili.</p>
+						<span class="manifesto__number"><?php echo esc_html( $n ); ?>.</span>
+						<h3 class="manifesto__item-title"><?php echo esc_html( $item['titolo'] ); ?></h3>
+						<p><?php echo esc_html( $item['testo'] ); ?></p>
 					</div>
 				</div>
 			</div>
-
-			<!-- Punto 3 -->
-			<div class="manifesto__item" tabindex="0" role="article">
-				<div class="manifesto__default">
-					<span class="manifesto__number" aria-hidden="true">3.</span>
-					<h3 class="manifesto__item-title">Monitoraggio e ottimizzazione</h3>
-					<p class="manifesto__item-intro">Analizzare i risultati e migliorare continuamente.</p>
-				</div>
-				<div class="manifesto__hover-layer" aria-hidden="true">
-					<div class="manifesto__hover-photo">
-						<div class="media-placeholder light"><span>Foto</span></div>
-					</div>
-					<div class="manifesto__hover-text">
-						<span class="manifesto__number">3.</span>
-						<h3 class="manifesto__item-title">Monitoraggio e ottimizzazione</h3>
-						<p>Analizzare i risultati, capire cosa funziona e migliorare continuamente la strategia.</p>
-					</div>
-				</div>
-			</div>
-
-			<!-- Punto 4 -->
-			<div class="manifesto__item" tabindex="0" role="article">
-				<div class="manifesto__default">
-					<span class="manifesto__number" aria-hidden="true">4.</span>
-					<h3 class="manifesto__item-title">Espansione e crescita</h3>
-					<p class="manifesto__item-intro">Scalare il business al prossimo livello.</p>
-				</div>
-				<div class="manifesto__hover-layer" aria-hidden="true">
-					<div class="manifesto__hover-photo">
-						<div class="media-placeholder light"><span>Foto</span></div>
-					</div>
-					<div class="manifesto__hover-text">
-						<span class="manifesto__number">4.</span>
-						<h3 class="manifesto__item-title">Espansione e crescita</h3>
-						<p>Scalare il business, consolidare i risultati e preparare il prossimo livello di sviluppo.</p>
-					</div>
-				</div>
-			</div>
+			<?php endforeach; ?>
 
 		</div>
 	</section>
@@ -205,7 +194,7 @@
 			<a href="/blog" class="blog-video__blog-link">← Pagina al blog</a>
 		</div>
 		<div class="blog-video__content reveal">
-			<p class="blog-video__quote">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
+			<p class="blog-video__quote"><?php echo esc_html( get_field( 'blog_citazione' ) ); ?></p>
 			<a href="/blog" class="blog-video__scopri">Scopri <span aria-hidden="true">›</span></a>
 		</div>
 	</section>
@@ -214,20 +203,29 @@
 	     ATTIVITÀ — 3 card con hover overlay
 	     Per Aziende | Self | Gruppi
 	═══════════════════════════════════════════════ -->
+	<?php
+	$img_aziende = get_field( 'attivita_aziende_img' );
+	$img_self    = get_field( 'attivita_self_img' );
+	$img_gruppi  = get_field( 'attivita_gruppi_img' );
+	?>
 	<section class="attivita" id="attivita" aria-label="Le attività">
 		<div class="attivita__grid">
 
 			<!-- Card: Per Aziende -->
 			<div class="attivita__card attivita__card--dark" tabindex="0">
 				<div class="attivita__card-bg">
-					<div class="media-placeholder dark"></div>
+					<?php if ( $img_aziende ) : ?>
+						<img src="<?php echo esc_url( $img_aziende['url'] ); ?>" alt="<?php echo esc_attr( $img_aziende['alt'] ); ?>">
+					<?php else : ?>
+						<div class="media-placeholder dark"></div>
+					<?php endif; ?>
 				</div>
 				<div class="attivita__card-label">
 					<h3>Per Aziende</h3>
 				</div>
 				<div class="attivita__card-overlay">
 					<h3>Per Aziende</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+					<p><?php echo esc_html( get_field( 'attivita_aziende_testo' ) ); ?></p>
 					<a href="#contatti" class="btn btn--white">Scopri <span aria-hidden="true">›</span></a>
 				</div>
 			</div>
@@ -235,14 +233,18 @@
 			<!-- Card: Self -->
 			<div class="attivita__card attivita__card--light" tabindex="0">
 				<div class="attivita__card-bg">
-					<div class="media-placeholder light"></div>
+					<?php if ( $img_self ) : ?>
+						<img src="<?php echo esc_url( $img_self['url'] ); ?>" alt="<?php echo esc_attr( $img_self['alt'] ); ?>">
+					<?php else : ?>
+						<div class="media-placeholder light"></div>
+					<?php endif; ?>
 				</div>
 				<div class="attivita__card-label">
 					<h3>Self</h3>
 				</div>
 				<div class="attivita__card-overlay">
 					<h3>Self</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+					<p><?php echo esc_html( get_field( 'attivita_self_testo' ) ); ?></p>
 					<a href="#contatti" class="btn btn--dark">Scopri <span aria-hidden="true">›</span></a>
 				</div>
 			</div>
@@ -250,14 +252,18 @@
 			<!-- Card: Gruppi -->
 			<div class="attivita__card attivita__card--dark" tabindex="0">
 				<div class="attivita__card-bg">
-					<div class="media-placeholder dark"></div>
+					<?php if ( $img_gruppi ) : ?>
+						<img src="<?php echo esc_url( $img_gruppi['url'] ); ?>" alt="<?php echo esc_attr( $img_gruppi['alt'] ); ?>">
+					<?php else : ?>
+						<div class="media-placeholder dark"></div>
+					<?php endif; ?>
 				</div>
 				<div class="attivita__card-label">
 					<h3>Gruppi</h3>
 				</div>
 				<div class="attivita__card-overlay">
 					<h3>Gruppi</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+					<p><?php echo esc_html( get_field( 'attivita_gruppi_testo' ) ); ?></p>
 					<a href="#contatti" class="btn btn--white">Scopri <span aria-hidden="true">›</span></a>
 				</div>
 			</div>
@@ -273,7 +279,6 @@
 			<p class="cta-section__pretitle">Costruiamo il tuo percorso</p>
 			<p class="cta-section__script"><em>insieme</em><span class="cta-section__arrow" aria-hidden="true"> →</span></p>
 			<a href="#contatti" class="cta-section__btn">Iniziamo</a>
-			<p class="cta-section__note">Pulsante a contact form e/o contatti</p>
 		</div>
 	</section>
 

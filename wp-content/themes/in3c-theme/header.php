@@ -36,6 +36,12 @@
 
 		<!-- Social & Actions -->
 		<div class="header-actions">
+			<?php
+			$home_id         = get_option( 'page_on_front' );
+			$url_instagram   = get_field( 'social_instagram', $home_id );
+			$url_linkedin    = get_field( 'social_linkedin', $home_id );
+			$url_facebook    = get_field( 'social_facebook', $home_id );
+			?>
 
 			<!-- Email -->
 			<a href="mailto:info@in3c.it" class="header-actions__icon" aria-label="Email">
@@ -46,7 +52,7 @@
 			</a>
 
 			<!-- Instagram -->
-			<a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="header-actions__icon" aria-label="Instagram">
+			<a href="<?php echo esc_url( $url_instagram ?: 'https://www.instagram.com/' ); ?>" target="_blank" rel="noopener noreferrer" class="header-actions__icon" aria-label="Instagram">
 				<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 					<rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
 					<path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
@@ -55,7 +61,7 @@
 			</a>
 
 			<!-- LinkedIn -->
-			<a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" class="header-actions__icon" aria-label="LinkedIn">
+			<a href="<?php echo esc_url( $url_linkedin ?: 'https://www.linkedin.com/' ); ?>" target="_blank" rel="noopener noreferrer" class="header-actions__icon" aria-label="LinkedIn">
 				<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 					<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
 					<rect x="2" y="9" width="4" height="12"/>
@@ -64,7 +70,7 @@
 			</a>
 
 			<!-- Facebook -->
-			<a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" class="header-actions__icon" aria-label="Facebook">
+			<a href="<?php echo esc_url( $url_facebook ?: 'https://www.facebook.com/' ); ?>" target="_blank" rel="noopener noreferrer" class="header-actions__icon" aria-label="Facebook">
 				<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 					<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
 				</svg>
