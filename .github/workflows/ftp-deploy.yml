@@ -17,31 +17,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Installa lftp
-        run: sudo apt-get install -y lftp
-
-      - name: Deploy wp-content via FTP
-        run: |
-          lftp -e "
-            set ftps:initial-prot '';
-            set ftp:ssl-force true;
-            set ftp:ssl-protect-data true;
-            set ssl:verify-certificate false;
-            open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_SERVER }};
-            mirror --reverse --verbose \
-              --exclude-glob .git \
-              --exclude-glob .git/ \
-              --exclude-glob node_modules/ \
-              --exclude-glob uploads/ \
-              --exclude-glob cache/ \
-              --exclude-glob languages/ \
-              --exclude-glob upgrade/ \
-              --exclude-glob updraft/ \
-              --exclude-glob backup-db/ \
-              --exclude-glob DOCUMENTAZIONE.md \
-              --exclude-glob '*.log' \
-              --exclude-glob '*.tmp' \
-              --exclude-glob '*.bak' \
-              ./wp-content/ www.in3c.org/wp-content/;
-            bye
-          "
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./wp-content/
+          server-dir: /www.in3c.org/wp-content/
+          exclude: |
+            **/.git*
+            **/node_modules/**
+            **/uploads/**
+            **/cache/**
+            **/languages/**
+            **/upgrade/**
+            **/updraft/**
+            **/backup-db/**
+            **/*.log
+            **/*.tmp
+            **/*.bak
