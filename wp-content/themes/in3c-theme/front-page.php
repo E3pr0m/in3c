@@ -10,7 +10,11 @@
 		<div class="hero__media">
 			<?php
 			$uploads   = wp_upload_dir();
-			$video_url = trailingslashit( $uploads['baseurl'] ) . 'video_hero.mp4';
+			// $video_url = trailingslashit( $uploads['baseurl'] ) . 'video_hero.mp4';
+			$video_field = get_field( 'hero_video' );
+			$video_url = $video_field ? $video_field['url'] : '';
+
+
 			?>
 			<video class="hero__video" autoplay muted loop playsinline>
 				<source src="<?php echo esc_url( $video_url ); ?>" type="video/mp4">
