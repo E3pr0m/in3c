@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'wp-content/themes/in3c-theme/**'
+      - 'wp-content/**'
 
 jobs:
   deploy:
@@ -16,18 +16,31 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Deploy tema in3c via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server:      ${{ secrets.FTP_SERVER }}
-          username:    ${{ secrets.FTP_USERNAME }}
-          password:    ${{ secrets.FTP_PASSWORD }}
-          server-dir:  ${{ secrets.FTP_SERVER_DIR }}
-          local-dir:   ./wp-content/themes/in3c-theme/
-          protocol:    ftps
-          port:        21
-          log-level:   standard
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
+      - name: Installa lftp
+        run: sudo apt-get install -y lftp
+
+      - name: Deploy wp-content via FTP
+        run: |
+          lftp -e "
+            set ftps:initial-prot '';
+            set ftp:ssl-force true;
+            set ftp:ssl-protect-data true;
+            set ssl:verify-certificate false;
+            open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_SERVER }};
+            mirror --reverse --verbose \
+              --exclude-glob .git \
+              --exclude-glob .git/ \
+              --exclude-glob node_modules/ \
+              --exclude-glob uploads/ \
+              --exclude-glob cache/ \
+              --exclude-glob languages/ \
+              --exclude-glob upgrade/ \
+              --exclude-glob updraft/ \
+              --exclude-glob backup-db/ \
+              --exclude-glob DOCUMENTAZIONE.md \
+              --exclude-glob '*.log' \
+              --exclude-glob '*.tmp' \
+              --exclude-glob '*.bak' \
+              ./wp-content/ wp-content/;
+            bye
+          "
