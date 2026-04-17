@@ -42,6 +42,6 @@ jobs:
               --exclude-glob '*.log' \
               --exclude-glob '*.tmp' \
               --exclude-glob '*.bak' \
-              ./wp-content/ wp-content/;
+              ./wp-content/ www.in3c.org/wp-content/;
             bye
           "
