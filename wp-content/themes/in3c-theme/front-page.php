@@ -1,5 +1,13 @@
 <?php get_header(); ?>
 
+<?php
+$acf_about        = get_field( 'about' )        ?: [];
+$acf_video_banner = get_field( 'video_banner' )  ?: [];
+$acf_manifesto    = get_field( 'manifesto' )     ?: [];
+$acf_attivita     = get_field( 'attivita' )      ?: [];
+$acf_blog         = get_field( 'blog' )          ?: [];
+?>
+
 <main class="site-main" id="main">
 
 	<!-- ═══════════════════════════════════════════════
@@ -9,12 +17,8 @@
 	<section class="hero" id="home" aria-label="Hero">
 		<div class="hero__media">
 			<?php
-			$uploads   = wp_upload_dir();
-			// $video_url = trailingslashit( $uploads['baseurl'] ) . 'video_hero.mp4';
 			$video_field = get_field( 'hero_video' );
-			$video_url = $video_field ? $video_field['url'] : '';
-
-
+			$video_url   = $video_field ? $video_field['url'] : '';
 			?>
 			<video class="hero__video" autoplay muted loop playsinline>
 				<source src="<?php echo esc_url( $video_url ); ?>" type="video/mp4">
@@ -35,7 +39,7 @@
 	═══════════════════════════════════════════════ -->
 	<section class="about" id="chi-sono" aria-label="Chi sono">
 		<div class="about__photo">
-			<?php $foto_coach = get_field( 'about_foto_coach' ); ?>
+			<?php $foto_coach = $acf_about['about_foto_coach'] ?? null; ?>
 			<?php if ( $foto_coach ) : ?>
 				<img
 					src="<?php echo esc_url( $foto_coach['url'] ); ?>"
@@ -55,7 +59,7 @@
 				<div class="about__accent-bar"></div>
 				<div class="about__block-content">
 					<h2 class="about__block-title">Un po' di me</h2>
-					<p><?php echo esc_html( get_field( 'about_testo_me' ) ); ?></p>
+					<p><?php echo esc_html( $acf_about['about_testo_me'] ?? '' ); ?></p>
 				</div>
 			</div>
 
@@ -63,7 +67,7 @@
 				<div class="about__accent-bar"></div>
 				<div class="about__block-content">
 					<h3 class="about__block-title about__block-title--sm">Cosa faccio</h3>
-					<p><?php echo esc_html( get_field( 'about_testo_faccio' ) ); ?></p>
+					<p><?php echo esc_html( $acf_about['about_testo_faccio'] ?? '' ); ?></p>
 				</div>
 			</div>
 
@@ -71,7 +75,7 @@
 				<div class="about__accent-bar"></div>
 				<div class="about__block-content">
 					<h3 class="about__block-title about__block-title--sm">(A chi?)</h3>
-					<p><?php echo esc_html( get_field( 'about_testo_achi' ) ); ?></p>
+					<p><?php echo esc_html( $acf_about['about_testo_achi'] ?? '' ); ?></p>
 				</div>
 			</div>
 
@@ -96,11 +100,11 @@
 	     Sfondo scuro: testo rosso grande + media
 	═══════════════════════════════════════════════ -->
 	<section class="video-banner" id="percorsi" aria-label="Video banner">
-		<div class="video-banner__text reveal">
-			<p class="video-banner__quote"><?php echo esc_html( get_field( 'banner_citazione' ) ); ?></p>
+		<div class="video-banner__text">
+			<p class="video-banner__quote"><?php echo esc_html( $acf_video_banner['banner_citazione'] ?? '' ); ?></p>
 		</div>
 		<div class="video-banner__media">
-			<?php $banner_media = get_field( 'banner_media' ); ?>
+			<?php $banner_media = $acf_video_banner['banner_media'] ?? null; ?>
 			<?php if ( $banner_media ) : ?>
 				<img
 					src="<?php echo esc_url( $banner_media['url'] ); ?>"
@@ -129,28 +133,28 @@
 			<?php
 			$manifesto_items = array(
 				1 => array(
-					'titolo' => get_field( 'manifesto_1_titolo' ),
-					'intro'  => get_field( 'manifesto_1_intro' ),
-					'testo'  => get_field( 'manifesto_1_testo' ),
-					'foto'   => get_field( 'manifesto_1_foto' ),
+					'titolo' => $acf_manifesto['manifesto_1_titolo'] ?? '',
+					'intro'  => $acf_manifesto['manifesto_1_intro']  ?? '',
+					'testo'  => $acf_manifesto['manifesto_1_testo']  ?? '',
+					'foto'   => $acf_manifesto['manifesto_1_foto']   ?? null,
 				),
 				2 => array(
-					'titolo' => get_field( 'manifesto_2_titolo' ),
-					'intro'  => get_field( 'manifesto_2_intro' ),
-					'testo'  => get_field( 'manifesto_2_testo' ),
-					'foto'   => get_field( 'manifesto_2_foto' ),
+					'titolo' => $acf_manifesto['manifesto_2_titolo'] ?? '',
+					'intro'  => $acf_manifesto['manifesto_2_intro']  ?? '',
+					'testo'  => $acf_manifesto['manifesto_2_testo']  ?? '',
+					'foto'   => $acf_manifesto['manifesto_2_foto']   ?? null,
 				),
 				3 => array(
-					'titolo' => get_field( 'manifesto_3_titolo' ),
-					'intro'  => get_field( 'manifesto_3_intro' ),
-					'testo'  => get_field( 'manifesto_3_testo' ),
-					'foto'   => get_field( 'manifesto_3_foto' ),
+					'titolo' => $acf_manifesto['manifesto_3_titolo'] ?? '',
+					'intro'  => $acf_manifesto['manifesto_3_intro']  ?? '',
+					'testo'  => $acf_manifesto['manifesto_3_testo']  ?? '',
+					'foto'   => $acf_manifesto['manifesto_3_foto']   ?? null,
 				),
 				4 => array(
-					'titolo' => get_field( 'manifesto_4_titolo' ),
-					'intro'  => get_field( 'manifesto_4_intro' ),
-					'testo'  => get_field( 'manifesto_4_testo' ),
-					'foto'   => get_field( 'manifesto_4_foto' ),
+					'titolo' => $acf_manifesto['manifesto_4_titolo'] ?? '',
+					'intro'  => $acf_manifesto['manifesto_4_intro']  ?? '',
+					'testo'  => $acf_manifesto['manifesto_4_testo']  ?? '',
+					'foto'   => $acf_manifesto['manifesto_4_foto']   ?? null,
 				),
 			);
 
@@ -198,7 +202,7 @@
 			<a href="/blog" class="blog-video__blog-link">← Pagina al blog</a>
 		</div>
 		<div class="blog-video__content reveal">
-			<p class="blog-video__quote"><?php echo esc_html( get_field( 'blog_citazione' ) ); ?></p>
+			<p class="blog-video__quote"><?php echo esc_html( $acf_blog['blog_citazione'] ?? '' ); ?></p>
 			<a href="/blog" class="blog-video__scopri">Scopri <span aria-hidden="true">›</span></a>
 		</div>
 	</section>
@@ -208,9 +212,9 @@
 	     Per Aziende | Self | Gruppi
 	═══════════════════════════════════════════════ -->
 	<?php
-	$img_aziende = get_field( 'attivita_aziende_img' );
-	$img_self    = get_field( 'attivita_self_img' );
-	$img_gruppi  = get_field( 'attivita_gruppi_img' );
+	$img_aziende = $acf_attivita['attivita_aziende_img'] ?? null;
+	$img_self    = $acf_attivita['attivita_self_img']    ?? null;
+	$img_gruppi  = $acf_attivita['attivita_gruppi_img']  ?? null;
 	?>
 	<section class="attivita" id="attivita" aria-label="Le attività">
 		<div class="attivita__grid">
@@ -229,7 +233,7 @@
 				</div>
 				<div class="attivita__card-overlay">
 					<h3>Per Aziende</h3>
-					<p><?php echo esc_html( get_field( 'attivita_aziende_testo' ) ); ?></p>
+					<p><?php echo esc_html( $acf_attivita['attivita_aziende_testo'] ?? '' ); ?></p>
 					<a href="#contatti" class="btn btn--white">Scopri <span aria-hidden="true">›</span></a>
 				</div>
 			</div>
@@ -248,7 +252,7 @@
 				</div>
 				<div class="attivita__card-overlay">
 					<h3>Self</h3>
-					<p><?php echo esc_html( get_field( 'attivita_self_testo' ) ); ?></p>
+					<p><?php echo esc_html( $acf_attivita['attivita_self_testo'] ?? '' ); ?></p>
 					<a href="#contatti" class="btn btn--dark">Scopri <span aria-hidden="true">›</span></a>
 				</div>
 			</div>
@@ -267,7 +271,7 @@
 				</div>
 				<div class="attivita__card-overlay">
 					<h3>Gruppi</h3>
-					<p><?php echo esc_html( get_field( 'attivita_gruppi_testo' ) ); ?></p>
+					<p><?php echo esc_html( $acf_attivita['attivita_gruppi_testo'] ?? '' ); ?></p>
 					<a href="#contatti" class="btn btn--white">Scopri <span aria-hidden="true">›</span></a>
 				</div>
 			</div>

@@ -12,8 +12,8 @@
   --black:      #1a1a1a;
   --dark:       #2c2c2c;
   --white:      #ffffff;
-  --gray-light: #f5f4f2;
-  --gray:       #e5e1de;
+  --gray-light: #e7e5d9;
+  --gray:       #e7e5d9;
 
   --font-display: 'Bebas Neue', sans-serif;
   --font-body:    'Montserrat', sans-serif;
@@ -851,6 +851,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   transition: border-color 0.25s ease;
   width: 100%;
   -webkit-appearance: none;
+  appearance: none;
 }
 
 .contact-form__field input::placeholder,
